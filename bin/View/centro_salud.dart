@@ -1,3 +1,4 @@
+import 'dart:convert';
 import '../controller/controller.dart';
 import 'dart:io';
 import '../Utils/utils.dart';
@@ -47,7 +48,7 @@ return preguntaPers('Introduce una opción');
 }
 String preguntaPers(String mensaje){
   stdout.write('$mensaje: ');
-  return stdin.readLineSync() ?? '';
+  return stdin.readLineSync(encoding: utf8) ?? '';
 }
 Future<void> admitirPaciente() async{
   String dni = preguntaPers('Introduce el dni');

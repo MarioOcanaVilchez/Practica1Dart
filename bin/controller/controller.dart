@@ -62,7 +62,7 @@ Future<List<Paciente>> obtenCola() async{
 
 Future<String> aniadePacienteCola(Paciente paciente) async{
   paciente.posCola = (await obtenCola()).length + 1;
-  if (await postCola(Cola(idPaciente: paciente.id!, posicion: paciente.posCola!))) return 'Paciente en la posición ${paciente.posCola}';
+  if (await postCola(Cola(idPaciente: paciente.id!, posicion: paciente.posCola!))) return 'Paciente en la posición ${paciente.posCola} de la cola';
   else return 'Error al insertar en la cola';
 }
 
@@ -130,7 +130,7 @@ Future<String> pintaLaCola() async{
   List<Paciente> pacientes = await obtenCola();
   resultado += 'Ahora mismo hay ${pacientes.length} pacientes esperando';
   if (pacientes.isEmpty) return resultado;
-  pacientes.forEach((paciente) => resultado += '==== Paciente ${paciente.posCola} en la cola ====\n${paciente.pintaPaciente()}');
+  pacientes.forEach((paciente) => resultado += '\n==== Paciente ${paciente.posCola} en la cola ====\n${paciente.pintaPaciente()}');
   return resultado;
 }
 
@@ -141,7 +141,7 @@ Future<String> pintaConsultas() async{
   for (var consulta in consultas) {
     Medico medico = await getMedico(consulta.medico);
     Paciente? paciente = await getPaciente(consulta.paciente);
-    respuesta += '***** Consulta: ${consulta.numConsulta} ***********\nNombre del médico: ${medico.nombre}\nEspecialidad: ${medico.especialidad}\nPaciente: ${paciente != null ? '${paciente.nombre} ${paciente.apellidos}\nNum_historia: ${paciente.numHistoria}' : 'No hay paciente'} \n';
+    respuesta += '\n***** Consulta: ${consulta.numConsulta} ***********\nNombre del médico: ${medico.nombre}\nEspecialidad: ${medico.especialidad}\nPaciente: ${paciente != null ? '${paciente.nombre} ${paciente.apellidos}\nNum_historia: ${paciente.numHistoria}' : 'No hay paciente'} \n';
   }
   return respuesta;
 }
